@@ -23,7 +23,17 @@ cc_test(
     copts = CC_OPTS,
     deps = [
         "quadratic",
+        "testing_util",
         "util",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_library(
+    name = "testing_util",
+    srcs = ["testing_util.cc"],
+    hdrs = ["testing_util.hh"],
+    deps = [
         "@googletest//:gtest_main",
     ],
 )

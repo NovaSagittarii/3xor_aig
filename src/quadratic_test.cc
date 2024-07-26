@@ -4,6 +4,7 @@
 
 #include <random>
 
+#include "testing_util.hh"
 #include "util.hh"
 
 TEST(QuadraticXOR, FindOneTriplet) {
@@ -56,13 +57,5 @@ TEST(QuadraticXOR, MatchesCubic) {
     }
   }
 
-  std::cout << "triplets found (quadratic) = " << result.size() << std::endl;
-  std::cout << "triplets exist (cubic) = " << expected.size() << std::endl;
-  ASSERT_EQ(result.size(), expected.size()) << "Found amount should match";
-
-  std::sort(expected.begin(), expected.end());
-  std::sort(result.begin(), result.end());
-  for (size_t i = 0; i < expected.size(); ++i) {
-    ASSERT_EQ(expected[i], result[i]) << "Contents should match after sorting.";
-  }
+  testing_util::IsEquivalent(result, expected);
 }
