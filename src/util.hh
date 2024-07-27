@@ -36,7 +36,7 @@ std::vector<std::bitset<B>> InitializeBitset(const std::vector<T>& a) {
 template <size_t B>
 std::vector<uint64_t> RandomArray(int n) {
   static_assert(B <= 64, "uint64_t only fits 64 bits");
-  const uint64_t mod = 1 << B;
+  const uint64_t mod = ((uint64_t)1) << B;
   std::vector<uint64_t> a(n);
   for (int i = 0; i < n; ++i) {
     a[i] = std::rand() % mod;

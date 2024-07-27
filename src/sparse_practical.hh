@@ -1,6 +1,6 @@
 /**
  * @file sparse_practical.hh
- * @author your name (you@domain.com)
+ * @author 
  * @brief Implementation of the Practical version of Iterative 3XOR Algorithm
  * @version 0.1
  * @date 2024-07-27

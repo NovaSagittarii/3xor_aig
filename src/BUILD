@@ -9,6 +9,18 @@ cc_library(
     hdrs = ["3xor.hh"],
 )
 
+cc_binary(
+    name = "perf",
+    srcs = ["performance.cc"],
+    copts = CC_OPTS,
+    deps = [
+        "quadratic",
+        "sparse_practical",
+        "timing",
+        "util",
+    ],
+)
+
 cc_library(
     name = "quadratic",
     hdrs = ["quadratic.hh"],
@@ -54,6 +66,11 @@ cc_library(
         "3xor",
         "@googletest//:gtest_main",
     ],
+)
+
+cc_library(
+    name = "timing",
+    hdrs = ["timing.hh"],
 )
 
 cc_library(
