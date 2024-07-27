@@ -2,12 +2,13 @@
 
 #include <algorithm>
 
-void testing_util::IsEquivalent(Triplets a, Triplets b) {
-  ASSERT_EQ(a.size(), b.size()) << "Arrays should have same size.";
+void testing_util::IsEquivalent(Triplets result, Triplets expected) {
+  ASSERT_EQ(result.size(), expected.size()) << "Arrays should have same size.";
 
-  std::sort(a.begin(), a.end());
-  std::sort(b.begin(), b.end());
-  for (size_t i = 0; i < a.size(); ++i) {
-    ASSERT_EQ(a.at(i), b.at(i)) << "Contents should match after sorting.";
+  std::sort(result.begin(), result.end());
+  std::sort(expected.begin(), expected.end());
+  for (size_t i = 0; i < result.size(); ++i) {
+    ASSERT_EQ(result.at(i), expected.at(i))
+        << "Contents should match after sorting.";
   }
 }

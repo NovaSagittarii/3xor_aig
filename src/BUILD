@@ -6,13 +6,11 @@ load("//:cc_config.bzl", "CC_OPTS")
 
 cc_library(
     name = "3xor",
-    srcs = [],
     hdrs = ["3xor.hh"],
 )
 
 cc_library(
     name = "quadratic",
-    srcs = [],
     hdrs = ["quadratic.hh"],
     deps = ["3xor"],
 )
@@ -23,6 +21,25 @@ cc_test(
     copts = CC_OPTS,
     deps = [
         "quadratic",
+        "testing_util",
+        "util",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_library(
+    name = "sparse_practical",
+    hdrs = ["sparse_practical.hh"],
+    deps = ["3xor"],
+)
+
+cc_test(
+    name = "sparse_practical_test",
+    srcs = ["sparse_practical_test.cc"],
+    copts = CC_OPTS,
+    deps = [
+        "quadratic",
+        "sparse_practical",
         "testing_util",
         "util",
         "@googletest//:gtest_main",
