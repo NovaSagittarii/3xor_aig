@@ -34,6 +34,7 @@ cc_library(
     srcs = ["testing_util.cc"],
     hdrs = ["testing_util.hh"],
     deps = [
+        "3xor",
         "@googletest//:gtest_main",
     ],
 )

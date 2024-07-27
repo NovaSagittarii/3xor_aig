@@ -2,8 +2,6 @@
 
 #include <gtest/gtest.h>
 
-#include <random>
-
 #include "testing_util.hh"
 #include "util.hh"
 
@@ -25,8 +23,7 @@ TEST(QuadraticXOR, NoTriplets) {
 
 TEST(QuadraticXOR, TripletsAreValid) {
   QuadraticXOR<10> sol;
-  std::vector<uint64_t> nums(300);
-  for (auto &x : nums) x = std::rand() % 1024;
+  std::vector<uint64_t> nums = util::RandomArray<10>(300);
   auto elements = util::InitializeBitset<10>(nums);
   auto result = sol.FindTriplets(elements);
   std::cout << "triplets found = " << result.size() << std::endl;
@@ -41,8 +38,7 @@ TEST(QuadraticXOR, MatchesCubic) {
   const int B = 7;
   QuadraticXOR<B> sol;
   const size_t n = 100;
-  std::vector<uint64_t> nums(n);
-  for (auto &x : nums) x = std::rand() % (1 << B);
+  std::vector<uint64_t> nums = util::RandomArray<B>(n);
   auto elements = util::InitializeBitset<B>(nums);
   auto result = sol.FindTriplets(elements);
 

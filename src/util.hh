@@ -2,6 +2,7 @@
 #define SRC_UTIL_HH_
 
 #include <bitset>
+#include <random>
 #include <vector>
 
 namespace util {
@@ -23,6 +24,24 @@ std::vector<std::bitset<B>> InitializeBitset(const std::vector<T>& a) {
     b[i] = a[i];
   }
   return b;
+}
+
+/**
+ * @brief Generates a random array of `n` uint64_t's % (1<<B)
+ *
+ * @tparam B bits per elements
+ * @param n number of elements in output array
+ * @return std::vector<uint64_t>
+ */
+template <size_t B>
+std::vector<uint64_t> RandomArray(int n) {
+  static_assert(B <= 64, "uint64_t only fits 64 bits");
+  const uint64_t mod = 1 << B;
+  std::vector<uint64_t> a(n);
+  for (int i = 0; i < n; ++i) {
+    a[i] = std::rand() % mod;
+  }
+  return a;
 }
 
 }  // namespace util
