@@ -9,11 +9,31 @@ cc_library(
     hdrs = ["3xor.hh"],
 )
 
+cc_library(
+    name = "hamming_sort",
+    hdrs = ["hamming_sort.hh"],
+    deps = ["3xor"],
+)
+
+cc_test(
+    name = "hamming_sort_test",
+    srcs = ["hamming_sort_test.cc"],
+    copts = CC_OPTS,
+    deps = [
+        "hamming_sort",
+        "quadratic",
+        "testing_util",
+        "util",
+        "@googletest//:gtest_main",
+    ],
+)
+
 cc_binary(
     name = "perf",
     srcs = ["performance.cc"],
     copts = CC_OPTS,
     deps = [
+        "hamming_sort",
         "quadratic",
         "quadratic_hamming",
         "timing",
