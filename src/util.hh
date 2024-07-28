@@ -26,6 +26,17 @@ std::vector<std::bitset<B>> InitializeBitset(const std::vector<T>& a) {
   return b;
 }
 
+template <size_t B>
+std::vector<std::bitset<B>> InitializeRandomBitset(size_t n) {
+  std::vector<std::bitset<B>> a(n);
+  for (auto &x : a) {
+    for (size_t i = 0; i < B; ++i) {
+      x[i] = std::rand() & 1;
+    }
+  }
+  return a;
+};
+
 /**
  * @brief Generates a random array of `n` uint64_t's % (1<<B)
  *

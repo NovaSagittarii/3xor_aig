@@ -10,8 +10,7 @@
 template <size_t B>
 void RunTests(const std::vector<int>& n_vals) {
   for (const int n : n_vals) {
-    auto nums = util::RandomArray<B>(n);
-    auto a = util::InitializeBitset<B>(nums);
+    std::vector<std::bitset<B>> a = util::InitializeRandomBitset<B>(n);
 
     std::ostringstream o;
     o << "B=" << std::setw(5) << B << " n=" << std::setw(5) << n << " ";
@@ -40,7 +39,8 @@ int32_t main() {
   const std::vector<int> n_vals = {100, 400, 1000};
   RunTests<16>(n_vals);
   RunTests<32>(n_vals);
-  RunTests<63>(n_vals);
-  // RunTests<1 << 16>(n_vals);
+  RunTests<64>(n_vals);
+  RunTests<1 << 12>(n_vals);
+  RunTests<1 << 16>(n_vals);
   return 0;
 }
