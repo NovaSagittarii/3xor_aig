@@ -15,3 +15,12 @@ TEST(HammingSortXOR, Correctness) {
   auto expected = QuadraticXOR<B>().FindTriplets(elements);
   testing_util::IsEquivalent(result, expected);
 }
+
+TEST(HammingSortXOR, Correctness_LargeB) {
+  const size_t n = 100;
+  const int B = 4096;
+  auto elements = util::InitializeRandomBitset<B>(n);
+  auto result = HammingSortXOR<B>().FindTriplets(elements);
+  auto expected = QuadraticXOR<B>().FindTriplets(elements);
+  testing_util::IsEquivalent(result, expected);
+}

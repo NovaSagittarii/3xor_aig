@@ -55,3 +55,23 @@ TEST(QuadraticXOR, MatchesCubic) {
 
   testing_util::IsEquivalent(result, expected);
 }
+
+TEST(QuadraticXOR, MatchesCubic_LargeB) {
+  const size_t B = 4096;
+  const size_t n = 100;
+  auto elements = util::InitializeRandomBitset<B>(n);
+  auto result = QuadraticXOR<B>().FindTriplets(elements);
+
+  Triplets expected;
+  for (size_t i = 0; i < n; ++i) {
+    for (size_t j = i + 1; j < n; ++j) {
+      for (size_t k = j + 1; k < n; ++k) {
+        if ((elements[i] ^ elements[j]) == elements[k]) {
+          expected.push_back({i, j, k});
+        }
+      }
+    }
+  }
+
+  testing_util::IsEquivalent(result, expected);
+}
