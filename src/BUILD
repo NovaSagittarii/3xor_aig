@@ -15,9 +15,28 @@ cc_binary(
     copts = CC_OPTS,
     deps = [
         "quadratic",
-        "sparse_practical",
+        "quadratic_hamming",
         "timing",
         "util",
+    ],
+)
+
+cc_library(
+    name = "quadratic_hamming",
+    hdrs = ["quadratic_hamming.hh"],
+    deps = ["3xor"],
+)
+
+cc_test(
+    name = "quadratic_hamming_test",
+    srcs = ["quadratic_hamming_test.cc"],
+    copts = CC_OPTS,
+    deps = [
+        "quadratic",
+        "quadratic_hamming",
+        "testing_util",
+        "util",
+        "@googletest//:gtest_main",
     ],
 )
 

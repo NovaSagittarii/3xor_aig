@@ -2,7 +2,7 @@
 #include <sstream>
 
 #include "quadratic.hh"
-#include "sparse_practical.hh"
+#include "quadratic_hamming.hh"
 #include "timing.hh"
 #include "util.hh"
 
@@ -23,9 +23,9 @@ void RunTests(const std::vector<int>& n_vals) {
     EndClockPrint(label + "Quadratic");
     StartClock();
     for (int iter = 0; iter < 5; ++iter) {
-      SparsePracticalXOR<B>().FindTriplets(a);
+      QuadraticHammingXOR<B>().FindTriplets(a);
     }
-    EndClockPrint(label + "SparsePractical");
+    EndClockPrint(label + "QuadraticHamming");
   }
 }
 
