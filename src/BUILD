@@ -9,6 +9,21 @@ cc_library(
     hdrs = ["3xor.hh"],
 )
 
+cc_binary(
+    name = "bench",
+    srcs = ["benchmark.cc"],
+    copts = CC_OPTS,
+    deps = [
+        "hamming_sort",
+        "quadratic",
+        "quadratic_hamming",
+        "timing",
+        "util",
+        "//src/aig:aig_simulator",
+        "@parlaylib",
+    ],
+)
+
 cc_library(
     name = "hamming_sort",
     hdrs = ["hamming_sort.hh"],

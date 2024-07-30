@@ -1,0 +1,3 @@
+[submodule "externals/iwls2024-ls-contest"]
+	path = externals/iwls2024-ls-contest
+	url = https://github.com/alanminko/iwls2024-ls-contest

@@ -7,7 +7,7 @@
 
 #include "aig.hh"
 
-class AIGSimulator : protected AIG {
+class AIGSimulator : public AIG {
  public:
   AIGSimulator() {}
   void Load(const std::filesystem::path& path);

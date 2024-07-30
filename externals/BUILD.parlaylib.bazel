@@ -1,0 +1,14 @@
+"""
+Bazel BUILD for lorina library -- used for running faster benchmarks
+"""
+
+cc_library(
+    name = "parlaylib",
+    hdrs = glob([
+        "include/**/*.h",
+    ]),
+    includes = [
+        "include",
+    ],
+    visibility = ["//visibility:public"],
+)

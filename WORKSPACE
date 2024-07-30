@@ -11,3 +11,11 @@ git_repository(
     recursive_init_submodules = True,
     remote = "git@github.com:hriener/lorina.git",
 )
+
+git_repository(
+    name = "parlaylib",
+    build_file = "@//externals:BUILD.parlaylib.bazel",
+    commit = "36459f42a84207330eae706c47e6fab712e6a149",
+    recursive_init_submodules = True,
+    remote = "git@github.com:cmuparlay/parlaylib.git",
+)
