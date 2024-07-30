@@ -116,3 +116,16 @@ cc_library(
     name = "util",
     hdrs = ["util.hh"],
 )
+
+cc_binary(
+    name = "visualize",
+    srcs = ["visualize.cc"],
+    deps = [
+        "hamming_sort",
+        "quadratic",
+        "quadratic_hamming",
+        "timing",
+        "util",
+        "//src/aig:aig_simulator",
+    ],
+)

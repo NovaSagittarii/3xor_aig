@@ -1,0 +1,18 @@
+"""
+Bazel BUILD for lorina library -- used for parsing AIG
+"""
+
+cc_library(
+    name = "lorina",
+    hdrs = glob([
+        "include/**/*.hpp",
+        "include/**/*.inc",
+        "lib/fmt/**/*",  # uhh... strange errors happen without this
+    ]),
+    includes = [
+        "include",
+        "include/lorina",
+        "lib/fmt",
+    ],
+    visibility = ["//visibility:public"],
+)
