@@ -99,6 +99,8 @@ class AIG {
   const auto sz_o() const { return sz_o_; }  // # of ouputs
   const auto sz_a() const { return sz_a_; }  // # of AND gates
   const auto& nodes() const { return nodes_; }
+  const auto& inputs() const { return inputs_; }
+  const auto& outputs() const { return outputs_; }
 
  protected:
   /**
