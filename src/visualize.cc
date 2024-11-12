@@ -103,7 +103,8 @@ void WriteNodes(std::ostream& os, AIGSimulator& aig) {
   }
 }
 
-void WriteTriplets(std::ostream& os, const Triplets& triplets) {
+void WriteTriplets(std::ostream& os, const AIGSimulator& aig,
+                   const Triplets& triplets) {
   std::set<std::array<int, 2>> written;
   auto WriteOnce = [&](int u, int v, int k) -> void {
     if (u > v) std::swap(u, v);
@@ -117,17 +118,37 @@ void WriteTriplets(std::ostream& os, const Triplets& triplets) {
     WriteEdge(os, u, v, style.str());
   };
   int k = 0;
+  std::set<std::array<size_t, 3>> seen;
   for (auto [x, y, z] : triplets) {
+    // // filter out pure io
+    // int bad = 0;
+    // for (auto i : std::array<size_t, 3>{x, y, z}) bad += aig.nodes()[i].is_io;
+    // if (bad >= 3) continue;
+
+    // filter out duplicate triplets (variation on negations)
+    std::array<size_t, 3> key = {x | 1, y | 1, z | 1};
+    if (seen.count(key)) continue;
+    if (k < 10) std::cerr << x << " " << y << " " << z << std::endl;
+    else if (k == 10) std::cerr << "..." << std::endl;
+    seen.insert(key);
+
     WriteOnce(x, y, k);
     WriteOnce(y, z, k);
     WriteOnce(x, z, k);
     ++k;
   }
+  std::cerr << "Detected " << k << " unique XOR triplets." << std::endl;
+
+  // for (int i = 0; i < aig.signatures().size(); ++i) {
+  //   std::cerr << i << " ";
+  //   for (int j = 0; j < 4; ++j) std::cerr << aig.signatures()[i][j];
+  //   std::cerr << "\n";
+  // }
 }
 
 int32_t main() {
   AIGSimulator aig;
-  aig.Load("data/tiny.aig");
+  aig.Load("data/sm.aig");
   auto triplets = HammingSortXOR<1 << 16>().FindTriplets(aig.signatures());
 
   std::ofstream fout;
@@ -137,7 +158,7 @@ int32_t main() {
   WriteHeader(os, aig);
   WriteSubheader(os, aig, triplets);
   WriteNodes(os, aig);
-  WriteTriplets(os, triplets);
+  WriteTriplets(os, aig, triplets);
   os << "}" << std::endl;
 
   fout.close();
@@ -148,7 +169,7 @@ int32_t main() {
   std::ostringstream buffer;
   buffer << fin.rdbuf();
   fin.close();
-  
+
   // regex to straighten out 3XOR triplet triangles
   std::regex regex_a(
       "(stroke=\"#[0-9a-f]+\" stroke-dasharray=[^d]*d=\"M[^C]*C).*? "
